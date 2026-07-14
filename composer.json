@@ -1,5 +1,5 @@
 {
-    "name": "noahboos/laravel-commands",
+    "name": "noahboos/zonzons-laravel-commands",
     "description": "A collection of additional Laravel Artisan commands.",
     "type": "library",
     "version": "1.0.0",
