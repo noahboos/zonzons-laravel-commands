@@ -32,6 +32,26 @@ class MakeServiceCommand extends Command {
      * Execute the console command.
      */
     public function handle(): int {
+        $this->createBaseService();
+
+        return $this->createRequestedService();
+    }
+
+    public function createBaseService(): void {
+        $path = app_path('Services/Service.php');
+
+        if (file_exists($path)) {
+            return;
+        }
+
+        $this->files->ensureDirectoryExists(app_path('Services'));
+
+        $stub = $this->files->get(PackagePath::stubs() . '/base-service.stub');
+
+        $this->files->put($path, $stub);
+    }
+
+    public function createRequestedService(): int {
         $name = $this->argument('name');
         $className = Str::studly($name) . 'Service';
 
@@ -44,7 +64,7 @@ class MakeServiceCommand extends Command {
 
         $this->files->ensureDirectoryExists(app_path('Services'));
 
-        $stub = $this->files->get(PackagePath::stubs() . '/service.stub');
+        $stub = $this->files->get(PackagePath::stubs() . '/requested-service.stub');
         $stub = str_replace('{{ $className }}', $className, $stub);
 
         $this->files->put($path, $stub);

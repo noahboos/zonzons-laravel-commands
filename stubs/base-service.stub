@@ -1,0 +1,7 @@
+<?php
+
+namespace App\Services;
+
+abstract class Service {
+    // Service logic that is common to all generated services goes here.
+}
