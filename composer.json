@@ -1,0 +1,21 @@
+{
+    "name": "noahboos/laravel-commands",
+    "description": "A collection of additional Laravel Artisan commands.",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Noahboos\\LaravelCommands\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Noah Boos (Rift) (Propzonzon)",
+            "email": "noahboos-dev@proton.me"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "illuminate/console": "^13.0",
+        "illuminate/support": "^13.0"
+    }
+}
