@@ -1,0 +1,7 @@
+<?php
+
+namespace App\Helpers;
+
+abstract class Helper {
+    // Helper logic that is common to all generated helpers goes here.
+}

@@ -3,7 +3,8 @@
 namespace NoahBoos\LaravelCommands;
 
 use Illuminate\Support\ServiceProvider;
-use NoahBoos\LaravelCommands\Commands\MakeServiceCommand;
+use Noahboos\LaravelCommands\Commands\MakeHelperCommand;
+use Noahboos\LaravelCommands\Commands\MakeServiceCommand;
 
 class LaravelCommandsServiceProvider extends ServiceProvider {
     /**
@@ -18,6 +19,7 @@ class LaravelCommandsServiceProvider extends ServiceProvider {
      */
     public function boot(): void {
         $this->commands([
+            MakeHelperCommand::class,
             MakeServiceCommand::class
         ]);
     }
