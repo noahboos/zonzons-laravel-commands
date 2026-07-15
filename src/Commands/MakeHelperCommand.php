@@ -7,20 +7,20 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use NoahBoos\LaravelCommands\Support\PackagePath;
 
-class MakeServiceCommand extends Command {
+class MakeHelperCommand extends Command {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'make:service {name}';
+    protected $signature = 'make:helper {name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new service class.';
+    protected $description = 'Create a new helper class.';
 
     public function __construct(
         protected Filesystem $files
@@ -32,44 +32,44 @@ class MakeServiceCommand extends Command {
      * Execute the console command.
      */
     public function handle(): int {
-        $this->createBaseService();
+        $this->createBaseHelper();
 
-        return $this->createRequestedService();
+        return $this->createRequestedHelper();
     }
 
-    public function createBaseService(): void {
-        $path = app_path('Services/Service.php');
+    public function createBaseHelper(): void {
+        $path = app_path('Helpers/Helper.php');
 
         if (file_exists($path)) {
             return;
         }
 
-        $this->files->ensureDirectoryExists(app_path('Services'));
+        $this->files->ensureDirectoryExists(app_path('Helpers'));
 
-        $stub = $this->files->get(PackagePath::stubs() . '/base-service.stub');
+        $stub = $this->files->get(PackagePath::stubs() . '/base-helper.stub');
 
         $this->files->put($path, $stub);
     }
 
-    public function createRequestedService(): int {
+    public function createRequestedHelper(): int {
         $name = $this->argument('name');
-        $className = Str::studly($name) . 'Service';
+        $className = Str::studly($name) . 'Helper';
 
-        $path = app_path('Services/' . $className . '.php');
+        $path = app_path('Helpers/' . $className . '.php');
 
         if (file_exists($path)) {
-            $this->error('Service already exists!');
+            $this->error('Helper already exists!');
             return self::FAILURE;
         }
 
-        $this->files->ensureDirectoryExists(app_path('Services'));
+        $this->files->ensureDirectoryExists(app_path('Helpers'));
 
-        $stub = $this->files->get(PackagePath::stubs() . '/requested-service.stub');
+        $stub = $this->files->get(PackagePath::stubs() . '/requested-helper.stub');
         $stub = str_replace('{{ $className }}', $className, $stub);
 
         $this->files->put($path, $stub);
 
-        $this->info('Service created successfully!');
+        $this->info('Helper created successfully!');
         return self::SUCCESS;
     }
 }

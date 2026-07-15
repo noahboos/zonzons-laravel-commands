@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use NoahBoos\LaravelCommands\Foundation\Service;
-
 class {{ $className }} extends Service {
     // Service logic goes here.
 }
